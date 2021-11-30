@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'ItemMenuSituacao.dart';
 
 class MenuSituacaoOcorrencia extends StatefulWidget {
-  const MenuSituacaoOcorrencia({Key? key}) : super(key: key);
+  final Function onSelecionaItemMenu;
+  const MenuSituacaoOcorrencia({
+    Key? key,
+    required this.onSelecionaItemMenu,
+  }) : super(key: key);
 
   @override
   _MenuSituacaoOcorrenciaState createState() => _MenuSituacaoOcorrenciaState();
@@ -29,21 +33,23 @@ class _MenuSituacaoOcorrenciaState extends State<MenuSituacaoOcorrencia> {
             ativo: this.pendentes,
             onPressed: () {
               setState(() {
+                this.widget.onSelecionaItemMenu('PENDENTE');
                 this.pendentes = true;
                 this.resolvidos = false;
               });
             },
           ),
           ItemMenuSituacao(
-            titulo: 'Resolvidos', 
+            titulo: 'Resolvidos',
             ativo: this.resolvidos,
             onPressed: () {
               setState(() {
+                this.widget.onSelecionaItemMenu('RESOLVIDO');
                 this.pendentes = false;
                 this.resolvidos = true;
               });
-            },            
-            )
+            },
+          )
         ],
       ),
     );
